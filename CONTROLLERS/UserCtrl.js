@@ -3,13 +3,14 @@ const jwt = require('jsonwebtoken');
 const encryptPass = require('bcryptjs');
 const {validationResult} = require('express-validator/check')
 
+
 const addUser = async (req,res)=>{
     try {
         const{fName,lName,email,password,confirmPass} =req.body
         const validationRes = validationResult(req);
         console.log(validationRes);
         if(validationRes.errors.length >0){
-            return res.status(201).json({"status":"Error","data":validationRes.errors}  )
+            return res.status(400).json({"status":"Error","data":validationRes.errors}  )
         }
         else if(password.trim() !== confirmPass.trim()){
             return res.status(201).json({"status":"Error","data":[{"msg":"Sorry Both password and Confirm password must be the same."}]}  )
@@ -35,14 +36,14 @@ const addUser = async (req,res)=>{
                     return res.status(201).json({"status":"Error","data":[{"msg":"sdfsdf"}]})
                 }
                 else{
-                    console.log("TOKEN GEN Success....."); 
-                     await newUser.save();   
+                    console.log("TOKEN GEN Success.....");
+                     await newUser.save();
                     // return res.status(200).json({"status":"Success","data":newUser})
                     return res.status(200).json({"status":"Success","data":[{"msg":newUser,"token":token}]})
                 }
             })
-    
-         
+
+
 
         }
     } catch (error) {
