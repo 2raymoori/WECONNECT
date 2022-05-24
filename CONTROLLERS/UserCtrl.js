@@ -16,6 +16,11 @@ const addUser = async (req,res)=>{
             return res.status(201).json({"status":"Error","data":[{"msg":"Sorry Both password and Confirm password must be the same."}]}  )
 
         }else{
+            // Check if user already exists
+            const userExists = await UserModel.find({"email":email});
+            if(userExists.length > 0){
+                return res.status(400).json({"status":"Error","data":[{"msg":"Sorry user already exists"}]}  )
+            }
             const newUser = new UserModel();
             newUser.firstName = fName;
             newUser.lastName = lName;
@@ -37,7 +42,7 @@ const addUser = async (req,res)=>{
                 }
                 else{
                     console.log("TOKEN GEN Success.....");
-                     await newUser.save();
+                    await newUser.save();
                     // return res.status(200).json({"status":"Success","data":newUser})
                     return res.status(200).json({"status":"Success","data":[{"msg":newUser,"token":token}]})
                 }
@@ -47,6 +52,8 @@ const addUser = async (req,res)=>{
 
         }
     } catch (error) {
+        console.log("Sorry something went wrong...")
+        console.log(error.message)
         return res.status(500).json({"status":"Failure","data":"Error..."})
     }
 }
