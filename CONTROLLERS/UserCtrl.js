@@ -35,15 +35,12 @@ const addUser = async (req,res)=>{
                 "email":email,
                 "id":newUser.id
             }
-            jwt.sign(payload,"4472897njieS_!",{expiresIn:3600},async(err,token)=>{
+            jwt.sign(payload,"4472897njieS_!",{expiresIn:360000},async(err,token)=>{
                 if(err){
-                    console.log("Error....."+err);
                     return res.status(201).json({"status":"Error","data":[{"msg":"sdfsdf"}]})
                 }
                 else{
-                    console.log("TOKEN GEN Success.....");
                     await newUser.save();
-                    // return res.status(200).json({"status":"Success","data":newUser})
                     return res.status(200).json({"status":"Success","data":[{"msg":newUser,"token":token}]})
                 }
             })
