@@ -49,8 +49,6 @@ const addUser = async (req,res)=>{
 
         }
     } catch (error) {
-        console.log("Sorry something went wrong...")
-        console.log(error.message)
         return res.status(500).json({"status":"Failure","data":"Error..."})
     }
 }
