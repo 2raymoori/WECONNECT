@@ -10,7 +10,7 @@ const UserSchema =new mongoose.Schema({
         required:true
     },
     password:{
-        type:String, 
+        type:String,
         required:true
     },
     profileImg:{
@@ -28,4 +28,4 @@ const UserSchema =new mongoose.Schema({
         default:Date.now
     }
 })
-module.exports =mongoose.model("Users",UserSchema);
+module.exports =mongoose.model("users",UserSchema);
