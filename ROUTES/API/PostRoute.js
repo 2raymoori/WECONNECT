@@ -1,11 +1,17 @@
 const express = require('express');
-const {addpost,deletepost,modifypost,allpost,post} = require('../../CONTROLLERS/PostCtrl');
+const { check } = require('express-validator/check');
+const authenticate = require('../../MiddleWare/auth')
+const {addpost,deletepost,modifypost,allpost,myposts,post} = require('../../CONTROLLERS/PostCtrl');
 const Router = express.Router();
-Router.get("/allUser",allpost)
-Router.get("/user",post)
-Router.post("/add",addpost)
-Router.delete("/delete",deletepost)
-Router.put("/update",modifypost)
+Router.get("/allPosts",authenticate,allpost)
+Router.get("/myposts",authenticate,authenticate,myposts)
+Router.get("/post/:id",authenticate,post)
+Router.post("/add",[[
+    check("description","Sorry Description is required").not().isEmpty(),
+    check("title","Sorry Title is required").not().isEmpty()
+],authenticate],addpost)
+Router.delete("/:id",authenticate,deletepost)
+Router.put("/:id",authenticate,modifypost)
 
 
 module.exports = Router

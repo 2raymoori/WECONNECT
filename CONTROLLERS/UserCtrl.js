@@ -8,7 +8,6 @@ const addUser = async (req,res)=>{
     try {
         const{fName,lName,email,password,confirmPass} =req.body
         const validationRes = validationResult(req);
-        console.log(validationRes);
         if(validationRes.errors.length >0){
             return res.status(400).json({"status":"Error","data":validationRes.errors}  )
         }
