@@ -18,6 +18,5 @@ Router.post("/",[
     check("password","Sorry Pleae Provide a valid password").isLength({min:6})
 ],addUser);
 Router.put("",modifyUser);
-Router.delete("",deleteUser);
 
 module.exports = Router;

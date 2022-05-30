@@ -51,10 +51,6 @@ const addUser = async (req,res)=>{
         return res.status(500).json({"status":"Failure","data":"Error..."})
     }
 }
-
-const deleteUser = (req,res)=>{
-
-}
 const modifyUser = (req,res)=>{
 
 }
@@ -68,7 +64,6 @@ const getUser = (req,res)=>{
 
 module.exports ={
     addUser,
-    deleteUser,
     modifyUser,
     allUser,
     getUser

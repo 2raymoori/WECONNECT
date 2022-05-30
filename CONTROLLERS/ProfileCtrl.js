@@ -48,7 +48,7 @@ const deleteProfile = async(req,res)=>{
 }
 const allProfile =async (req,res)=>{
     try {
-        const allProfile = await ProfileSchema.find();
+        const allProfile = await ProfileSchema.find().populate("user",["firstName","lastName","email"]);
         return res.status(200).json({"status":"Success","data":[{"msg":allProfile}]})
 
     } catch (error) {
