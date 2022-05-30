@@ -86,7 +86,59 @@ const post = async(req,res) => {
 
     }
 }
+const likePost = async(req,res) =>{
+    try {
+        const postId = req.params.id;
+        const findPost = await PostModel.findById(postId);
+        if(findPost){
+            console.log(req.user.id);
+            const likesList = findPost.likes;
+            const newLIke = {"users":req.user.id};
+            let flag = false;
+            likesList.map(e=>{
+                if(e.users == req.user.id){
+                    flag = true;
+                    // break;
+                }
+            })
+            if(!flag){
+                findPost.likes.push(newLIke);
+                await findPost.save();
+            }
+
+            return res.status(200).json({"status":"Success","data":[{"msg":"Post like success","data":findPost}]})
+            console.log("Post Found");
+        }
+        else{
+            return res.status(400).json({"status": "Failure","data":[{"msg": "No Post with such an Id in the System"}]})
+        }
+    } catch (error) {
+        return res.status(500).json({"status":"Failure","data":"Error..."})
+    }
+
+}
+
+const commentPost = async(req,res) =>{
+    try {
+        const postId = req.params.id;
+        const findPost = await PostModel.findById(postId);
+        if(findPost){
+            const newComment = {"users":req.user.id,"description":req.body.description};
+                findPost.comments.push(newComment);
+                await findPost.save();
+
+            return res.status(200).json({"status":"Success","data":[{"msg":"Post like success","data":findPost}]})
+            console.log("Post Found");
+        }
+        else{
+            return res.status(400).json({"status": "Failure","data":[{"msg": "No Post with such an Id in the System"}]})
+        }
+    } catch (error) {
+        return res.status(500).json({"status":"Failure","data":"Error..."})
+    }
+
+}
 
 module.exports = {
-    addpost,deletepost,modifypost,allpost,myposts,post
+    addpost,deletepost,modifypost,allpost,myposts,post,likePost,commentPost
 }
