@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { setAlert } from '../../Actions/Alert';
+
 const axios = require('axios')
-const Register = () => {
+const Register = (props) => {
     const [formData,setFormData] = useState({fName:"",lName:"",email:"",password:"",passwordConfirm:""});
     const {fName,lName,email,password,passwordConfirm} = formData;
     const onChangeText = (e) => {
@@ -10,7 +13,7 @@ const Register = () => {
     const submitForm = async(e) => {
         e.preventDefault();
         if(password !== passwordConfirm){
-            console.log("Password not match");
+            props.setAlert("Password not match","danger");
         }else{
             try {
                 const config = {
@@ -68,4 +71,4 @@ const Register = () => {
     </section>
   )
 }
-export default Register;
+export default connect(null,{setAlert})(Register);
