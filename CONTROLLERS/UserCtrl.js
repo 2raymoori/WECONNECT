@@ -6,12 +6,12 @@ const {validationResult} = require('express-validator/check')
 
 const addUser = async (req,res)=>{
     try {
-        const{fName,lName,email,password,confirmPass} =req.body
+        const{fName,lName,email,password,passwordConfirm} =req.body
         const validationRes = validationResult(req);
         if(validationRes.errors.length >0){
             return res.status(400).json({"status":"Error","data":validationRes.errors}  )
         }
-        else if(password.trim() !== confirmPass.trim()){
+        else if(password.trim() !== passwordConfirm.trim()){
             return res.status(201).json({"status":"Error","data":[{"msg":"Sorry Both password and Confirm password must be the same."}]}  )
 
         }else{
