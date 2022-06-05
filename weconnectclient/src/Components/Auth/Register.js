@@ -2,6 +2,8 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setAlert } from '../../Actions/Alert';
+import { RegisterUser } from '../../Actions/Auth';
+
 
 const axios = require('axios')
 const Register = (props) => {
@@ -15,20 +17,21 @@ const Register = (props) => {
         if(password !== passwordConfirm){
             props.setAlert("Password not match","danger");
         }else{
-            try {
-                const config = {
-                    headers: {
-                        "Content-Type":"application/json"
-                    }
-                }
-                const newUer = {fName,lName,email,password,passwordConfirm}
-                const body = JSON.stringify(newUer);
-                const res = await axios.post("/api/user",body,config)
-                console.log(res.data)
+          props.RegisterUser({fName,lName,email,password,passwordConfirm})
+            // try {
+            //     const config = {
+            //         headers: {
+            //             "Content-Type":"application/json"
+            //         }
+            //     }
+            //     const newUer = {fName,lName,email,password,passwordConfirm}
+            //     const body = JSON.stringify(newUer);
+            //     const res = await axios.post("/api/user",body,config)
+            //     console.log(res.data)
 
-            } catch (error) {
-                console.log(error.response.data)
-            }
+            // } catch (error) {
+            //     console.log(error.response.data)
+            // }
         }
     }
     return (
@@ -37,13 +40,13 @@ const Register = (props) => {
       <p className="lead"><i className="fas fa-user"></i> Create Your Account</p>
       <form className="form" onSubmit={submitForm}>
         <div className="form-group">
-          <input type="text" placeholder="First Name" value={fName} onChangeCapture={onChangeText} name="fName" required />
+          <input type="text" placeholder="First Name" value={fName} onChangeCapture={onChangeText} name="fName"  />
         </div>
         <div className="form-group">
-          <input type="text" placeholder="Last Name" value={lName} onChangeCapture={onChangeText} name="lName" required />
+          <input type="text" placeholder="Last Name" value={lName} onChangeCapture={onChangeText} name="lName"  />
         </div>
         <div className="form-group">
-          <input type="email" placeholder="Email Address" onChangeCapture={onChangeText} value={email} name="email" required />
+          <input type="email" placeholder="Email Address" onChangeCapture={onChangeText} value={email} name="email"  />
         </div>
         <div className="form-group">
           <input
@@ -51,7 +54,6 @@ const Register = (props) => {
             type="password"
             placeholder="Password"
             name="password"
-            minLength="6" required
           />
         </div>
         <div className="form-group">
@@ -60,7 +62,6 @@ const Register = (props) => {
             type="password"
             placeholder="Confirm Password"
             name="passwordConfirm"
-            minLength="6" required
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Register" />
@@ -71,4 +72,4 @@ const Register = (props) => {
     </section>
   )
 }
-export default connect(null,{setAlert})(Register);
+export default connect(null,{setAlert,RegisterUser})(Register);
