@@ -8,14 +8,16 @@ import {
 import "./App.css";
 import Login from "./Components/Auth/Login";
 import Register from "./Components/Auth/Register";
-import Dashboard from "./Components/Layouts/Dashboard";
+import Dashboard from "./Components/Dashboard/Dashboard";
 import Landing from "./Components/Layouts/Landing";
 import Navbar from "./Components/Layouts/Navbar";
+import CreateProfile from "./Components/Profile/Create";
 import { Provider } from "react-redux";
 import store from "./store";
 import Alert from "./Components/Alert";
 import authToken from "./utils/authToken";
 import { loadUser } from "./Actions/Auth";
+import Create from "./Components/Profile/Create";
 
 if (localStorage.token) {
   authToken(localStorage.token);
@@ -38,6 +40,11 @@ const App = () => {
               <Route path="/login" exact="true" element={<Login />} />
               <Route path="/register" exact="true" element={<Register />} />
               <Route path="/dashboard" exact="true" element={<Dashboard />} />
+              <Route
+                path="create-profile"
+                exact={true}
+                element={<CreateProfile />}
+              />
             </Routes>
           </section>
         </Fragment>

@@ -1,7 +1,6 @@
 import axios from "axios";
 import authToken from "../utils/authToken";
 import { setAlert } from "./Alert";
-
 //Load User
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -9,10 +8,18 @@ export const loadUser = () => async (dispatch) => {
   }
   try {
     const res = await axios.get("/api/auth");
+    // console.log(res.data.data[0].msg);
     dispatch({
       type: "USER_LOADED",
-      payload: res.data.data,
+      payload: res.data.data[0].msg,
     });
+
+    const response = await axios.get("/api/profile/me");
+    // console.log(response.data.data[0]);
+    // dispatch({
+    //   type: "L_PROFILE",
+    //   payload: response.data.data[0],
+    // });
   } catch (error) {
     dispatch({
       type: "AUTH_ERROR",
@@ -48,21 +55,21 @@ export const RegisterUser =
       });
       dispatch(loadUser());
       if (res.status === 201) {
-        console.log("sdfs");
+        // console.log("sdfs");
         res.data.data.forEach((err) => {
           dispatch(setAlert(err.msg, "danger"));
         });
       }
       // console.log(res.data)
     } catch (error) {
-      console.log(error.message);
-      console.log(error);
+      // console.log(error.message);
+      // console.log(error);
     }
   };
 
 export const login = (email, password) => async (dispatch) => {
   try {
-    console.log("FROM XYZZ");
+    // console.log("FROM XYZZ");
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +84,6 @@ export const login = (email, password) => async (dispatch) => {
       body,
       config
     );
-    console.log(res.data.data[0].msg);
     if (res.data.status == "Success") {
       dispatch({
         type: "LOGIN_SUCCESS",
@@ -92,7 +98,7 @@ export const login = (email, password) => async (dispatch) => {
   }
 };
 export const logout = () => (dispatch) => {
-  console.log("xyz LOTOUT...");
+  dispatch({ type: "CLEAR_PROFILE" });
   dispatch({
     type: "LOGOUT",
   });

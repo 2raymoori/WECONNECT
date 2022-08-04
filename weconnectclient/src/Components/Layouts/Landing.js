@@ -1,7 +1,11 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from "react";
+import { connect } from "react-redux";
+import { Link, Navigate } from "react-router-dom";
 
- const Landing = () => {
+const Landing = (props) => {
+  if (props.auth.isAuthenticated) {
+    return <Navigate replace to="/dashboard" />;
+  }
   return (
     <section className="landing">
       <div className="dark-overlay">
@@ -12,14 +16,19 @@ import { Link } from 'react-router-dom'
             other developers
           </p>
           <div className="buttons">
-            <Link to="/register" className="btn btn-primary">Sign Up</Link>
-            <Link to="/login" className="btn btn-light">Login</Link>
+            <Link to="/register" className="btn btn-primary">
+              Sign Up
+            </Link>
+            <Link to="/login" className="btn btn-light">
+              Login
+            </Link>
           </div>
         </div>
       </div>
     </section>
-  )
-}
-
-export default Landing
-
+  );
+};
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+export default connect(mapStateToProps)(Landing);

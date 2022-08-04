@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { login } from "../../Actions/Auth";
+import Dashboard from "../Dashboard/Dashboard";
 const axios = require("axios");
 
 const Login = (props) => {
@@ -10,11 +11,12 @@ const Login = (props) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   useEffect(() => {
-    console.log(props.userAuth.isAuthenticated);
+    // console.log(props.userAuth.isAuthenticated);
   }, []);
   const submitForm = async (e) => {
     e.preventDefault();
     props.login(email, password);
+    // console.log(props.profile);
     // try {
     //   const login = { email, password };
     //   const config = {
@@ -34,11 +36,11 @@ const Login = (props) => {
   const { email, password } = formData;
 
   if (props.userAuth.isAuthenticated) {
+    // return <h1>Lamin Dashboard</h1>;
     return <Navigate replace to="/dashboard" />;
   }
   return (
     <section>
-      <div className="alert alert-danger">Invalid credentials</div>
       <h1 className="large text-primary">Sign In</h1>
       <p classNameName="lead">
         <i className="fas fa-user"></i> Sign into Your Account
@@ -73,5 +75,6 @@ const Login = (props) => {
 };
 const mapStateToProps = (state) => ({
   userAuth: state.auth,
+  profile: state.profile,
 });
 export default connect(mapStateToProps, { login })(Login);

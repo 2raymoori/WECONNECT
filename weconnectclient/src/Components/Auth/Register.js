@@ -40,7 +40,7 @@ const Register = (props) => {
     }
   };
   if (props.userAuth.isAuthenticated) {
-    return <Navigate path to="/dashboard" />;
+    return <Navigate replace to="/dashboard" />;
   }
   return (
     <section>

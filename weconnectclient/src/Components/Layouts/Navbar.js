@@ -8,16 +8,16 @@ const Navbar = (props) => {
     return (
       <ul>
         <li>
-          <a href="#!" onClick={props.logout}>
+          <Link to="/dashboard">Dashboard</Link>
+        </li>
+        <li>
+          <Link to="/login" onClick={props.logout}>
             Logout
-          </a>
+          </Link>
         </li>
       </ul>
     );
   };
-  useEffect(() => {
-    console.log(props.auth.isAuthenticated);
-  });
   const guestLinks = () => {
     return (
       <ul>
