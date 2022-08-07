@@ -17,7 +17,9 @@ import store from "./store";
 import Alert from "./Components/Alert";
 import authToken from "./utils/authToken";
 import { loadUser } from "./Actions/Auth";
-import Create from "./Components/Profile/Create";
+import EditProfile from "./Components/Profile/EditProfile";
+import Experience from "./Components/Profile/Experience";
+import Education from "./Components/Profile/Education";
 
 if (localStorage.token) {
   authToken(localStorage.token);
@@ -41,9 +43,24 @@ const App = () => {
               <Route path="/register" exact="true" element={<Register />} />
               <Route path="/dashboard" exact="true" element={<Dashboard />} />
               <Route
-                path="create-profile"
+                path="/create-profile"
                 exact={true}
                 element={<CreateProfile />}
+              />
+              <Route
+                path="/edit-profile/:id"
+                exact="true"
+                element={<EditProfile />}
+              />
+              <Route
+                path="/add-experience/:id"
+                exact={true}
+                element={<Experience />}
+              />
+              <Route
+                path="/add-education/:id"
+                exact={true}
+                element={<Education />}
               />
             </Routes>
           </section>

@@ -114,7 +114,7 @@ const modifyProfile = async (req, res) => {
         instagram,
         linkedin,
         facebook,
-        working,
+        status,
       } = req.body;
       if (company) {
         profileToUpdate.company = company;
@@ -125,8 +125,8 @@ const modifyProfile = async (req, res) => {
       if (bio) {
         profileToUpdate.bio = bio;
       }
-      if (working) {
-        profileToUpdate.status = working;
+      if (status) {
+        profileToUpdate.status = status;
       } else {
         profileToUpdate.status = false;
       }
@@ -214,9 +214,10 @@ const addEducation = async (req, res) => {
     }
     const searchProfile = await ProfileSchema.findById(req.params.id);
     if (searchProfile) {
-      const { school, degree, fieldofstudy, from, to, description } = req.body;
+      const { school, degree, fieldofstudy, from, to, description, current } =
+        req.body;
       const education = { school, degree, fieldofstudy, from, description };
-      if (to) {
+      if (!current) {
         education.to = to;
       } else {
         education.current = true;
@@ -250,15 +251,16 @@ const addExperience = async (req, res) => {
     }
     const searchProfile = await ProfileSchema.findById(req.params.id);
     if (searchProfile) {
-      const { title, company, location, from, to, description } = req.body;
+      const { title, company, location, from, to, current, description } =
+        req.body;
       const experience = { title, company, from, description };
       if (location) {
         experience.location = location;
       }
-      if (to) {
-        experience.to = to;
-      } else {
+      if (current) {
         experience.current = true;
+      } else {
+        experience.to = to;
       }
       searchProfile.experience.push(experience);
       await searchProfile.save();

@@ -42,6 +42,74 @@ export const addProfile = (profileObject) => async (dispatch) => {
   }
 };
 
+export const updateProfile = (profileObj, profileId) => async (dispatch) => {
+  const updateUrl = `http://localhost:5000/api/profile/update/${profileId}`;
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify(profileObj);
+    const res = await axios.put(updateUrl, body, config);
+    dispatch(setAlert("Profile Successfully updated", "success"));
+  } catch (error) {
+    dispatch(setAlert("Sorry profile update", "danger"));
+  }
+};
+export const addExperience =
+  (experienceData, profileId) => async (dispatch) => {
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      };
+      const body = JSON.stringify(experienceData);
+      const res = await axios.put(
+        `http://localhost:5000/api/profile/addexperience/${profileId}`,
+        body,
+        config
+      );
+      console.log(res.data);
+      dispatch(setAlert("Experience Successfully added", "success"));
+    } catch (error) {
+      console.log(error);
+      dispatch(
+        setAlert(
+          "Sorry There exists an error while adding an experience",
+          "danger"
+        )
+      );
+    }
+  };
+
+export const addEducation = (educationData, profileId) => async (dispatch) => {
+  try {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    const body = JSON.stringify(educationData);
+    const res = await axios.put(
+      `http://localhost:5000/api/profile/addedu/${profileId}`,
+      body,
+      config
+    );
+    console.log(res.data);
+    dispatch(setAlert("Education Successfully added", "success"));
+  } catch (error) {
+    console.log(error);
+    dispatch(
+      setAlert(
+        "Sorry There exists an error while adding an Education",
+        "danger"
+      )
+    );
+  }
+};
+
 /*
       skills,
       company,
