@@ -2,11 +2,40 @@ import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
-import { uProfile } from "../../Actions/Profile.Action";
+import {
+  uProfile,
+  deleteProfile,
+  deleteEducation,
+  deleteExperience,
+} from "../../Actions/Profile.Action";
 
 const Dashboard = (props) => {
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
+  const confirmDelete = (deletionType, profileId, id2) => {
+    if (deletionType === 1) {
+      // Experience to delete
+      const userAns = window.confirm(
+        "Are you sure you want to delete this Experrience?"
+      );
+      if (userAns) {
+        props.deleteExperience(profileId, id2);
+      }
+    } else {
+      // Educationn to delete
+      const userAns = window.confirm(
+        "Are you sure you want to delete this Education?"
+      );
+      if (userAns) {
+        props.deleteEducation(profileId, id2);
+      }
+    }
+  };
+  const deleteProfile = (profileId) => {
+    if (window.confirm("Are you sure you want to delete your Profile?")) {
+      props.deleteProfile(profileId);
+    }
+  };
   const loadProfile = async () => {
     try {
       const res = await axios.get("/api/profile/me");
@@ -94,7 +123,14 @@ const Dashboard = (props) => {
                           {e.current ? "Now" : e.to.split("T")[0]}
                         </td>
                         <td>
-                          <button class="btn btn-danger">Delete</button>
+                          <button
+                            onClick={() => {
+                              confirmDelete(1, profile._id, e._id);
+                            }}
+                            class="btn btn-danger"
+                          >
+                            Delet00
+                          </button>
                         </td>
                       </tr>
                     );
@@ -130,7 +166,14 @@ const Dashboard = (props) => {
                           {e.current ? "Now" : e.to.split("T")[0]}
                         </td>
                         <td>
-                          <button class="btn btn-danger">Delete</button>
+                          <button
+                            onClick={() => {
+                              confirmDelete(0, profile._id, e._id);
+                            }}
+                            class="btn btn-danger"
+                          >
+                            Delete
+                          </button>
                         </td>
                       </tr>
                     );
@@ -139,7 +182,12 @@ const Dashboard = (props) => {
               </table>
             )}
             <div class="my-2">
-              <button class="btn btn-danger">
+              <button
+                onClick={() => {
+                  deleteProfile(profile._id);
+                }}
+                class="btn btn-danger"
+              >
                 <i class="fas fa-user-minus"></i>
                 Delete My Account
               </button>
@@ -156,7 +204,12 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
   p: state.p,
 });
-export default connect(mapStateToProps, { uProfile })(Dashboard);
+export default connect(mapStateToProps, {
+  uProfile,
+  deleteProfile,
+  deleteEducation,
+  deleteExperience,
+})(Dashboard);
 
 /*
 import axios from "axios";

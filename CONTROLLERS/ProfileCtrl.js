@@ -76,7 +76,7 @@ const deleteProfile = async (req, res) => {
     const profileToDelete = await ProfileSchema.findByIdAndDelete(
       req.params.id
     );
-    await profileToDelete.save();
+    // await profileToDelete.save();
     return res.status(200).json({
       status: "Success",
       data: [{ msg: "profile Delete Successfull" }],
@@ -238,10 +238,63 @@ const addEducation = async (req, res) => {
     return res.status(500).json({ status: "Failure", data: "Server Error..." });
   }
 };
-const modifyEducation = async (req, res) => {
+
+const deleteEducation = async (req, res) => {
   try {
-  } catch (error) {}
+    const { profileId, educationId } = req.params;
+    const profileFind = await ProfileSchema.findById(profileId);
+    if (profileFind) {
+      const newEdu = await profileFind.education.filter((e) => {
+        return e.id !== educationId;
+      });
+
+      profileFind.education = newEdu;
+      await profileFind.save();
+      return res
+        .status(200)
+        .json({ Status: "Success", data: "Education Successfully Deleted." });
+    } else {
+      return res.status(201).json({
+        status: "Failure",
+        data: "Sorry no profile exists with this Id. Please try again with a valid Id.",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      status: "Failure",
+      data: "sorrry There exists an error within the server.",
+    });
+  }
 };
+
+const deleteExperience = async (req, res) => {
+  try {
+    const { profileId, experienceId } = req.params;
+    const profileFind = await ProfileSchema.findById(profileId);
+    if (profileFind) {
+      const newExperience = await profileFind.experience.filter((e) => {
+        return e.id !== experienceId;
+      });
+
+      profileFind.experience = newExperience;
+      await profileFind.save();
+      return res
+        .status(200)
+        .json({ Status: "Success", data: "Experience Successfully Deleted." });
+    } else {
+      return res.status(201).json({
+        status: "Failure",
+        data: "Sorry no profile exists with this Id. Please try again with a valid Id.",
+      });
+    }
+  } catch (error) {
+    return res.status(500).json({
+      status: "Failure",
+      data: "sorrry There exists an error within the server.",
+    });
+  }
+};
+
 const addExperience = async (req, res) => {
   try {
     // Check for a missing field;
@@ -292,4 +345,6 @@ module.exports = {
   addEducation,
   addExperience,
   curUserProfile,
+  deleteEducation,
+  deleteExperience,
 };

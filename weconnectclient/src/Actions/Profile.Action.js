@@ -110,14 +110,58 @@ export const addEducation = (educationData, profileId) => async (dispatch) => {
   }
 };
 
-/*
-      skills,
-      company,
-      website,
-      bio,
-      youtube,
-      instagram,
-      linkedin,
-      facebook,
-      working,
-*/
+export const deleteProfile = (profileId) => async (dispatch) => {
+  try {
+    const res = await axios.delete(
+      `http://localhost:5000/api/profile/delete/${profileId}`
+    );
+    dispatch(
+      setAlert("Profile Successsfully Deleted from the System.", "success")
+    );
+  } catch (error) {
+    console.log(error);
+    dispatch(
+      setAlert(
+        "Sorry There exists an error while deleting the Profile. Please Try Again later.",
+        "danger"
+      )
+    );
+  }
+};
+
+export const deleteEducation = (profileId, educationId) => async (dispatch) => {
+  try {
+    const res = await axios.delete(
+      `http://localhost:5000/api/profile/${profileId}/${educationId}`
+    );
+    dispatch(
+      setAlert("Education Successsfully Deleted from the System.", "success")
+    );
+  } catch (error) {
+    dispatch(
+      setAlert(
+        "Sorry There exists an error while deleting the Education. Please Try Again later.",
+        "danger"
+      )
+    );
+  }
+};
+
+export const deleteExperience =
+  (profileId, experienceId) => async (dispatch) => {
+    try {
+      const res = await axios.delete(
+        `http://localhost:5000/api/profile/${profileId}/${experienceId}/delete`
+      );
+      dispatch(
+        setAlert("Experience Successsfully Deleted from the System.", "success")
+      );
+    } catch (error) {
+      dispatch(
+        setAlert(
+          "Sorry There exists an error while deleting the Experience. Please Try Again later.",
+          "danger"
+        )
+      );
+    }
+  };

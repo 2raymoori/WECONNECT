@@ -10,6 +10,8 @@ const {
   modifyProfile,
   allProfile,
   profile,
+  deleteEducation,
+  deleteExperience,
 } = require("../../CONTROLLERS/ProfileCtrl");
 const authenticate = require("../../MiddleWare/auth");
 
@@ -43,6 +45,8 @@ Router.put(
   ],
   addEducation
 );
+Router.delete("/:profileId/:educationId", deleteEducation);
+Router.delete("/:profileId/:experienceId/delete", deleteExperience);
 Router.put(
   "/addexperience/:id",
   [
