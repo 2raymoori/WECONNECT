@@ -11,6 +11,18 @@ const Navbar = (props) => {
           <Link to="/dashboard">Dashboard</Link>
         </li>
         <li>
+          <Link to="/profile">My Profile</Link>
+        </li>
+        <li>
+          <Link to="/profiles">Other Profiles</Link>
+        </li>
+        <li>
+          <Link to="/post">My Posts</Link>
+        </li>
+        <li>
+          <Link to="/posts">Other Posts</Link>
+        </li>
+        <li>
           <Link to="/login" onClick={props.logout}>
             Logout
           </Link>

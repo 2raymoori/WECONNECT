@@ -20,6 +20,10 @@ import { loadUser } from "./Actions/Auth";
 import EditProfile from "./Components/Profile/EditProfile";
 import Experience from "./Components/Profile/Experience";
 import Education from "./Components/Profile/Education";
+import Post from "./Components/Layouts/Post";
+import Posts from "./Components/Layouts/Posts";
+import Profile from "./Components/Layouts/Profile";
+import Profiles from "./Components/Layouts/Profiles";
 
 if (localStorage.token) {
   authToken(localStorage.token);
@@ -62,6 +66,10 @@ const App = () => {
                 exact={true}
                 element={<Education />}
               />
+              <Route path="/post" exact={true} element={<Post />} />
+              <Route path="/posts" exact={true} element={<Posts />} />
+              <Route path="/profile" exact={true} element={<Profile />} />
+              <Route path="/profiles" exact={true} element={<Profiles />} />
             </Routes>
           </section>
         </Fragment>
