@@ -1,6 +1,7 @@
 import axios from "axios";
 import authToken from "../utils/authToken";
 import { setAlert } from "./Alert";
+import { loadProfiles } from "./Profile.Action";
 //Load User
 export const loadUser = () => async (dispatch) => {
   if (localStorage.token) {
@@ -15,11 +16,11 @@ export const loadUser = () => async (dispatch) => {
     });
 
     const response = await axios.get("/api/profile/me");
-    // console.log(response.data.data[0]);
-    // dispatch({
-    //   type: "L_PROFILE",
-    //   payload: response.data.data[0],
-    // });
+    console.log(response.data.data[0]);
+    dispatch({
+      type: "L_PROFILE",
+      payload: response.data.data[0],
+    });
   } catch (error) {
     dispatch({
       type: "AUTH_ERROR",
@@ -90,13 +91,21 @@ export const login = (email, password) => async (dispatch) => {
         payload: { token: res.data.data[0].msg },
       });
       dispatch(loadUser());
+      dispatch(loadProfiles());
     }
   } catch (error) {
+    dispatch(
+      setAlert(
+        "Sorry There exists an error in your credentials. Please try again.",
+        "danger"
+      )
+    );
     dispatch({
       type: "LOGIN_FAILED",
     });
   }
 };
+
 export const logout = () => (dispatch) => {
   dispatch({ type: "CLEAR_PROFILE" });
   dispatch({

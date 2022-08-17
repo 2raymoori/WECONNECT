@@ -2,8 +2,8 @@ const initState = {
   error: {},
   userProfile: null,
   profiles: [],
+  other_profile: {},
   loading: true,
-  x: "xyz",
 };
 
 const profileReducer = (state = initState, action) => {
@@ -13,14 +13,23 @@ const profileReducer = (state = initState, action) => {
         ...state,
         userProfile: action.payload,
         loading: false,
-        x: "abc",
+      };
+    case "L_PROFILES":
+      return {
+        ...state,
+        profiles: action.payload,
+      };
+    case "OTHER_PROFILE":
+      return {
+        ...state,
+        other_profile: action.payload,
       };
     case "CLEAR_PROFILE":
       return {
         ...state,
         error: {},
         userProfile: null,
-        profiles: [],
+        profiles: action.payload,
         loading: false,
       };
     default:

@@ -24,6 +24,7 @@ import Post from "./Components/Layouts/Post";
 import Posts from "./Components/Layouts/Posts";
 import Profile from "./Components/Layouts/Profile";
 import Profiles from "./Components/Layouts/Profiles";
+import OtherProfile from "./Components/Layouts/OtherProfile";
 
 if (localStorage.token) {
   authToken(localStorage.token);
@@ -69,6 +70,11 @@ const App = () => {
               <Route path="/post" exact={true} element={<Post />} />
               <Route path="/posts" exact={true} element={<Posts />} />
               <Route path="/profile" exact={true} element={<Profile />} />
+              <Route
+                path="profiles/other-profile"
+                exact={true}
+                element={<OtherProfile />}
+              />
               <Route path="/profiles" exact={true} element={<Profiles />} />
             </Routes>
           </section>

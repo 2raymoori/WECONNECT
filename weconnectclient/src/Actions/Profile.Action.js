@@ -2,12 +2,12 @@ import axios from "axios";
 import { setAlert } from "./Alert";
 export const uProfile = () => async (dispatch) => {
   try {
-    // const res = await axios.get("http://localhost:5000/api/profile/me");
-    // // console.log(res.data.data[0]);
-    //   dispatch({
-    //     type: "L_PROFILE",
-    //     payload: res.data.data[0],
-    //   });
+    const res = await axios.get("http://localhost:5000/api/profile/me");
+    // console.log(res.data.data[0]);
+    dispatch({
+      type: "L_PROFILE",
+      payload: res.data.data[0],
+    });
   } catch (error) {
     console.log("Error.... in the uprofile Action");
   }
@@ -165,3 +165,21 @@ export const deleteExperience =
       );
     }
   };
+export const loadProfiles = () => async (dispatch) => {
+  try {
+    const URL = "http://localhost:5000/api/profile/allprofile";
+    const res = await axios.get(URL);
+    const profiles = res.data.data[0].msg;
+    dispatch({
+      type: "L_PROFILES",
+      payload: profiles,
+    });
+  } catch (error) {}
+};
+
+export const loadOtherProfile = (data) => async (dispatch) => {
+  dispatch({
+    type: "OTHER_PROFILE",
+    payload: data,
+  });
+};

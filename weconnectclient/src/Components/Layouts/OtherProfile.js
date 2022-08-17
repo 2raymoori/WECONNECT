@@ -1,9 +1,12 @@
 import React, { useEffect } from "react";
+import { useLocation } from "react-router-dom";
 import { connect } from "react-redux";
-const Profile = (props) => {
+const OtherProfile = (props) => {
   useEffect(() => {
-    console.log(props.profile);
-  });
+    console.log("otherProfile");
+    console.log(props.profile.other_profile);
+  }, []);
+
   return (
     <div>
       <a href="profiles.html" class="btn btn-light">
@@ -19,36 +22,36 @@ const Profile = (props) => {
             alt=""
           />
           <h1 class="large">
-            {props.profile.userProfile.msg.user.firstName}{" "}
-            {props.profile.userProfile.msg.user.lastName}
+            {props.profile.other_profile.user.firstName}{" "}
+            {props.profile.other_profile.user.lastName}
           </h1>
-          <p class="lead">{props.profile.userProfile.msg.status}</p>
+          <p class="lead">{props.profile.other_profile.status}</p>
           <p>Seattle, WA</p>
-          {props.profile.userProfile.msg.social && (
+          {props.profile.other_profile.social && (
             <div class="icons my-1">
-              {props.profile.userProfile.msg.social.twitter ? (
+              {props.profile.other_profile.social.twitter ? (
                 <a href="#" target="_blank" rel="noopener noreferrer">
                   <i class="fab fa-twitter fa-2x"></i>
                 </a>
               ) : (
                 ""
               )}
-              {props.profile.userProfile.msg.social.facebook && (
+              {props.profile.other_profile.social.facebook && (
                 <a href="lot" target="_blank" rel="noopener noreferrer">
                   <i class="fab fa-facebook fa-2x"></i>
                 </a>
               )}
-              {props.profile.userProfile.msg.social.linkedin && (
+              {props.profile.other_profile.social.linkedin && (
                 <a href="#" target="_blank" rel="noopener noreferrer">
                   <i class="fab fa-linkedin fa-2x"></i>
                 </a>
               )}
-              {props.profile.userProfile.msg.social.youtube && (
+              {props.profile.other_profile.social.youtube && (
                 <a href="#" target="_blank" rel="noopener noreferrer">
                   <i class="fab fa-youtube fa-2x"></i>
                 </a>
               )}
-              {props.profile.userProfile.msg.social.instagram && (
+              {props.profile.other_profile.social.instagram && (
                 <a href="#" target="_blank" rel="noopener noreferrer">
                   <i class="fab fa-instagram fa-2x"></i>
                 </a>
@@ -60,13 +63,13 @@ const Profile = (props) => {
         {/* <!-- About --> */}
         <div class="profile-about bg-light p-2">
           <h2 class="text-primary">
-            {props.profile.userProfile.msg.user.firstName}'s Bio
+            {props.profile.other_profile.user.firstName}'s Bio
           </h2>
-          <p>{props.profile.userProfile.msg.bio}</p>
+          <p>{props.profile.other_profile.bio}</p>
           <div class="line"></div>
           <h2 class="text-primary">Skill Set</h2>
           <div class="skills">
-            {props.profile.userProfile.msg.skills.map((e) => {
+            {props.profile.other_profile.skills.map((e) => {
               return (
                 <div class="p-1">
                   <i class="fa fa-check"></i> {e}
@@ -79,13 +82,13 @@ const Profile = (props) => {
         {/* <!-- Experience --> */}
         <div class="profile-exp bg-white p-2">
           <h2 class="text-primary">Experience</h2>
-          {props.profile.userProfile.msg.experience.length === 0 ? (
+          {props.profile.other_profile.experience.length === 0 ? (
             <div>
               <h2>Sorry No Experience added yet.</h2>
             </div>
           ) : (
             <div>
-              {props.profile.userProfile.msg.experience.map((e) => {
+              {props.profile.other_profile.experience.map((e) => {
                 return (
                   <div>
                     <h3 class="text-dark">{e.company}</h3>
@@ -112,13 +115,13 @@ const Profile = (props) => {
         {/* <!-- Education --> */}
         <div class="profile-edu bg-white p-2">
           <h2 class="text-primary">Education</h2>
-          {props.profile.userProfile.msg.education.length === 0 ? (
+          {props.profile.other_profile.education.length === 0 ? (
             <div className="profile-edu-box">
               <h2>Sorry No Education added yet.</h2>
             </div>
           ) : (
             <div>
-              {props.profile.userProfile.msg.education.map((e) => {
+              {props.profile.other_profile.education.map((e) => {
                 return (
                   <div>
                     <h3>{e.school}</h3>
@@ -155,4 +158,4 @@ const mapStateToProps = (state) => ({
   profile: state.p,
 });
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps, {})(OtherProfile);
