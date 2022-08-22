@@ -1,6 +1,7 @@
 import axios from "axios";
 import authToken from "../utils/authToken";
 import { setAlert } from "./Alert";
+import { loadCurPosts, loadOtherPosts } from "./Post";
 import { loadProfiles } from "./Profile.Action";
 //Load User
 export const loadUser = () => async (dispatch) => {
@@ -92,6 +93,8 @@ export const login = (email, password) => async (dispatch) => {
       });
       dispatch(loadUser());
       dispatch(loadProfiles());
+      dispatch(loadCurPosts());
+      dispatch(loadOtherPosts());
     }
   } catch (error) {
     dispatch(
