@@ -1,12 +1,33 @@
 import { connect } from "react-redux";
-import React, { useEffect } from "react";
-import { loadOtherPosts } from "../../Actions/Post";
+import React, { useEffect, useState } from "react";
+import { loadOtherPosts, likePost } from "../../Actions/Post";
+import { Alert } from "react-bootstrap";
+import Comment from "./Comment";
+
 const Posts = (props) => {
   useEffect(() => {
     console.log(props.posts);
   });
+
+  const likePost = (inputPostId) => {
+    props.likePost(inputPostId);
+  };
+
+  const hidePost = () => {
+    setCommentFlag(false);
+  };
+
+  const commentPostFlag = (id) => {
+    setPostId(id);
+    setCommentFlag(!commentFlag);
+  };
+  const [commentFlag, setCommentFlag] = useState(false);
+  const [postId, setPostId] = useState(2130);
+
   return (
+    // February 8th 2000
     <div>
+      <Comment hidePost={hidePost} commentFlag={commentFlag} postId={postId} />
       <h1>Current #Posts: {props.posts.otherPosts.length}</h1>
       <h1 class="large text-primary">Posts</h1>
       <p class="lead">
@@ -37,17 +58,28 @@ const Posts = (props) => {
                 </p>
                 <p class="my-1">{e.description}</p>
                 <p class="post-date">Posted on 04/16/2019</p>
-                <button type="button" class="btn btn-light">
+                <button
+                  onClick={() => {
+                    likePost(e._id);
+                  }}
+                  type="button"
+                  class="btn btn-light"
+                >
                   <i class="fas fa-thumbs-up"></i>
                   <span>{e.likes.length}</span>
                 </button>
                 <button type="button" class="btn btn-light">
                   <i class="fas fa-thumbs-down"></i>
                 </button>
-                <a href="post.html" class="btn btn-primary">
+                <button
+                  onClick={() => {
+                    commentPostFlag(e._id);
+                  }}
+                  class="btn btn-primary"
+                >
                   Discussion{" "}
                   <span class="comment-count">{e.comments.length}</span>
-                </a>
+                </button>
               </div>
             </div>
           );
@@ -59,5 +91,11 @@ const Posts = (props) => {
 const mapStateToProps = (state) => ({
   posts: state.postReducer,
 });
+export default connect(mapStateToProps, { loadOtherPosts, likePost })(Posts);
 
-export default connect(mapStateToProps, { loadOtherPosts })(Posts);
+/*
+Auto
+Keurr
+Kkhalis
+Man-Mii
+*/

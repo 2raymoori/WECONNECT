@@ -51,3 +51,18 @@ export const loadOtherPosts = () => async (dispatch) => {
     );
   }
 };
+export const likePost = (postId) => async (dispatch) => {
+  try {
+    const res = await axios.put(
+      `http://localhost:5000/api/post/${postId}/like`
+    );
+    dispatch(setAlert("Post Successfully Liked.", "success"));
+  } catch (error) {
+    dispatch(
+      setAlert(
+        "Sorry there exists an error within the system during post like. Please try again later",
+        "danger"
+      )
+    );
+  }
+};
