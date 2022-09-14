@@ -30,6 +30,10 @@ const postReducer = (state = initState, action) => {
         ...state,
         otherPosts: action.payload,
       };
+      // case "UPDATE_LIKE_COUNT":
+      // return{
+      //   ...state,
+      // }
     case "LOAD_CUR_USER_POSTS":
       console.log("LOAD_CUR_USER_POSTS rEDUCER....");
       return {

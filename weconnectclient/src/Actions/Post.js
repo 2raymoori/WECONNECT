@@ -51,6 +51,18 @@ export const loadOtherPosts = () => async (dispatch) => {
     );
   }
 };
+export const addComment=(postId,commentContent)=>async (dispatch)=>{
+try{
+
+    const data = { comment: commentContent};
+    const body = JSON.stringify(data);
+    const postUrl = "http://localhost:5000/api/post/add";
+    const res = await axios.put(`http://localhost:5000/api/post/${postId}/comment`);
+}
+catch(error){
+  dispatch("Error Occured during Comment.Please try again later");
+}
+}
 export const likePost = (postId) => async (dispatch) => {
   try {
     const res = await axios.put(

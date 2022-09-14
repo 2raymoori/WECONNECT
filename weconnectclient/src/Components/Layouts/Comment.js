@@ -13,13 +13,10 @@ const Comment = (props) => {
 
   return (
     <>
-      {/* <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
-      </Button> */}
 
       <Modal show={props.commentFlag} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Send Comment / Contribution</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -35,7 +32,7 @@ const Comment = (props) => {
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Label>Example textarea</Form.Label>
+              <Form.Label>Comment Content</Form.Label>
               <Form.Control
                 as="textarea"
                 placeholder={props.postId}
@@ -47,10 +44,10 @@ const Comment = (props) => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cancel Comment
           </Button>
           <Button variant="primary" onClick={handleClose}>
-            Save Changes
+            Post Comment
           </Button>
         </Modal.Footer>
       </Modal>

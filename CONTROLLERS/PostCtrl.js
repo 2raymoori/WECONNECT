@@ -45,7 +45,11 @@ const deletepost = async (req, res) => {
 };
 const allpost = async (req, res) => {
   try {
-    const allPost = await PostModel.find();
+    const allPost = await PostModel.find().populate("user", [
+      "firstName",
+      "lastName",
+      "email",
+    ]);;
     return res
       .status(200)
       .json({ status: "Success", data: [{ msg: allPost }] });
