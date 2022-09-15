@@ -11,9 +11,8 @@ const Profiles = (props) => {
     <div>
       <h1 class="large text-primary">Developers</h1>
       <p class="lead">
-        <i class="fab fa-connectdevelop"></i> Browse and connect with developers
+        <i class="fab fa-connectdevelop"></i> Browse and connect with developerssss
       </p>
-      <h1>{props.profiles.profiles.length}</h1>
       {props.profiles.profiles.length > 0 ? (
         <div class="profiles">
           {props.profiles.profiles.map((e) => {

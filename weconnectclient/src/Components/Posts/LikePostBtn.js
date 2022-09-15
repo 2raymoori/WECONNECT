@@ -1,9 +1,10 @@
-import React,{useState} from 'react';
+import React,{useState,Fragment} from 'react';
 
 const LikePostBtn = ({postId,likePost,e})=>{
 	const [likeCount,setLikeCount] = useState(0);
 	return(
-
+		<Fragment>
+		
                 <button
                   onClick={() => {
                     likePost(postId);
@@ -20,6 +21,7 @@ const LikePostBtn = ({postId,likePost,e})=>{
                   <i class="fas fa-thumbs-up"></i>
                   <span>{likeCount ==0 ? e.likes.length : likeCount}</span>
                 </button>
+		</Fragment>
 		)
 }
 export default LikePostBtn;

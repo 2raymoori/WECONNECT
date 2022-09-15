@@ -29,6 +29,7 @@ Router.post(
 Router.delete("/:id", authenticate, deletepost);
 Router.put("/:id", authenticate, modifypost);
 Router.put("/:id/like", authenticate, likePost);
+
 Router.put(
   "/:id/comment",
   [

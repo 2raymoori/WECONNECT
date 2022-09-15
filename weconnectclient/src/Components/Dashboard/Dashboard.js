@@ -129,7 +129,7 @@ const Dashboard = (props) => {
                             }}
                             class="btn btn-danger"
                           >
-                            Delet00
+                            Delete
                           </button>
                         </td>
                       </tr>

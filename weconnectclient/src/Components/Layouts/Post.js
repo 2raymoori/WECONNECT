@@ -20,7 +20,6 @@ const Post = (props) => {
   };
   return (
     <div>
-      <h1>Current #Posts: {props.posts.curUserPost.length}</h1>
       <h1 class="large text-primary">Posts</h1>
       <p class="lead">
         <i class="fas fa-user"></i> Welcome to the community!

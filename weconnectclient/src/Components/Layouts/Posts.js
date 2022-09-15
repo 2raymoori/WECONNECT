@@ -4,6 +4,7 @@ import { loadOtherPosts, likePost } from "../../Actions/Post";
 import { Alert } from "react-bootstrap";
 import Comment from "./Comment";
 import LikePostBtn from '../../Components/Posts/LikePostBtn'
+import DiscussionBtn from '../../Components/Posts/DiscussionBtn'
 
 const Posts = (props) => {
   useEffect(() => {
@@ -29,7 +30,6 @@ const Posts = (props) => {
     // February 8th 2000
     <div>
       <Comment hidePost={hidePost} commentFlag={commentFlag} postId={postId} />
-      <h1>Current #Posts: {props.posts.otherPosts.length}</h1>
       <h1 class="large text-primary">Posts</h1>
       <p class="lead">
         <i class="fas fa-user"></i> Welcome to the community!
@@ -59,19 +59,13 @@ const Posts = (props) => {
                 </p>
                 <p class="my-1">{e.description}</p>
                 <p class="post-date">Posted on 04/16/2019</p>
+
                 <LikePostBtn postId={e._id} likePost={likePost} e={e} />
+
                 <button type="button" class="btn btn-light">
                   <i class="fas fa-thumbs-down"></i>
                 </button>
-                <button
-                  onClick={() => {
-                    commentPostFlag(e._id);
-                  }}
-                  class="btn btn-primary"
-                >
-                  Discussion{" "}
-                  <span class="comment-count">{e.comments.length}</span>
-                </button>
+                <DiscussionBtn pId = {e._id} commentTrackCount={e.comments.length} />
               </div>
             </div>
           );
