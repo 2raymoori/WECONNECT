@@ -3,8 +3,7 @@ import { connect } from "react-redux";
 import { Link, Navigate } from "react-router-dom";
 import { setAlert } from "../../Actions/Alert";
 import { RegisterUser } from "../../Actions/Auth";
-
-const axios = require("axios");
+import axios from "axios";
 const Register = (props) => {
   const [formData, setFormData] = useState({
     fName: "",
@@ -12,8 +11,10 @@ const Register = (props) => {
     email: "",
     password: "",
     passwordConfirm: "",
+    pImage: "",
   });
   const { fName, lName, email, password, passwordConfirm } = formData;
+
   const onChangeText = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -22,7 +23,39 @@ const Register = (props) => {
     if (password !== passwordConfirm) {
       props.setAlert("Password not match", "danger");
     } else {
-      props.RegisterUser({ fName, lName, email, password, passwordConfirm });
+      // const fomData = new FormData();
+      // fomData.append("fName", fName);
+      // fomData.append("lName", lName);
+      // fomData.append("email", email);
+      // fomData.append("password", password);
+      // fomData.append("passwordConfirm", passwordConfirm);
+      // fomData.append("pImage", formData.pImage);
+      // console.log(formData);
+
+      // try {
+      //   const res = await axios.post(
+      //     `http://localhost:5000/api/user`,
+      //     fomData,
+      //     {
+      //       headers: {
+      //         "Content-Type": "application/json",
+      //       },
+      //     }
+      //   );
+      // } catch (error) {
+      //   console.log(error);
+      //   // alert("Sorry Document failed to upload. Please try again");
+      // }
+
+      props.RegisterUser({
+        fName,
+        lName,
+        email,
+        password,
+        passwordConfirm,
+        profileImage: formData.pImage,
+      });
+      /*
       // try {
       //     const config = {
       //         headers: {
@@ -37,7 +70,11 @@ const Register = (props) => {
       // } catch (error) {
       //     console.log(error.response.data)
       // }
+      */
     }
+  };
+  const captureProfileFile = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.files[0] });
   };
   if (props.userAuth.isAuthenticated) {
     return <Navigate replace to="/dashboard" />;
@@ -48,7 +85,11 @@ const Register = (props) => {
       <p className="lead">
         <i className="fas fa-user"></i> Create Your Account
       </p>
-      <form className="form" onSubmit={submitForm}>
+      <form
+        className="form"
+        enctype="multipart/form-data"
+        onSubmit={submitForm}
+      >
         <div className="form-group">
           <input
             type="text"
@@ -76,6 +117,18 @@ const Register = (props) => {
             name="email"
           />
         </div>
+
+        <div className="form-group">
+          <label for="pImage">Profile Image</label>
+          <input
+            id="pImage"
+            type="file"
+            name="pImage"
+            onChange={captureProfileFile}
+            className="form-control"
+          />
+        </div>
+
         <div className="form-group">
           <input
             onChangeCapture={onChangeText}

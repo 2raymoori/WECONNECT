@@ -30,12 +30,20 @@ export const loadUser = () => async (dispatch) => {
 };
 
 export const RegisterUser =
-  ({ fName, lName, email, password, passwordConfirm }) =>
+  ({ fName, lName, email, password, passwordConfirm, profileImage }) =>
   async (dispatch) => {
     try {
+      const fomData = new FormData();
+      fomData.append("fName", fName);
+      fomData.append("lName", lName);
+      fomData.append("email", email);
+      fomData.append("password", password);
+      fomData.append("passwordConfirm", passwordConfirm);
+      fomData.append("pImage", profileImage);
+
       const config = {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
         },
       };
       const body = JSON.stringify({
@@ -46,11 +54,19 @@ export const RegisterUser =
         passwordConfirm,
       });
 
-      const res = await axios.post(
-        "http://localhost:5000/api/user",
-        body,
-        config
-      );
+      // const res = await axios.post(
+      //   "http://localhost:5000/api/user",
+      //   body,
+      //   formData,
+      //   config
+      // );
+
+      const res = await axios.post("http://localhost:5000/api/user", fomData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
       dispatch({
         type: "REGISTER_SUCCESS",
         payload: { token: res.data.data[0].token },
