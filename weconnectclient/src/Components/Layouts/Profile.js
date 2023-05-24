@@ -15,7 +15,7 @@ const Profile = (props) => {
         <div class="profile-top bg-primary p-2">
           <img
             class="round-img my-1"
-            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+              src={`http://localhost:5000/pImages/${props.profile.userProfile.msg.user.profileImg}`}
             alt=""
           />
           <h1 class="large">

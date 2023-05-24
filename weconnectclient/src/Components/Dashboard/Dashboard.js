@@ -80,7 +80,10 @@ const Dashboard = (props) => {
         ) : (
           <Fragment>
             <p class="lead">
-              <i class="fas fa-user"></i> Welcome{" "}
+              <div className="imgContainer">
+              <img src={`http://localhost:5000/pImages/${props.auth.user.profileImg}`} height={50}  width={10} />
+              </div>
+               Welcome{" "}
               <i>{props.auth.user && props.auth.user.firstName}</i>
             </p>
             <div class="dash-buttons">

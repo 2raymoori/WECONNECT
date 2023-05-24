@@ -187,7 +187,7 @@ const curUserProfile = async (req, res) => {
   try {
     const curProfile = await ProfileSchema.findOne({
       user: req.user.id,
-    }).populate("user", ["firstName", "lastName", "email"]);
+    }).populate("user", ["firstName", "lastName", "email", "profileImg"]);
     if (curProfile) {
       return res
         .status(200)
