@@ -18,8 +18,8 @@ const OtherProfile = (props) => {
         <div class="profile-top bg-primary p-2">
           <img
             class="round-img my-1"
-            src="https://www.gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
-            alt=""
+            src={ props.profile.other_profile.user.profileImg ? `http://localhost:5001/pImages/${props.profile.other_profile.user.profileImg}`:`https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Avatar_icon_green.svg/2048px-Avatar_icon_green.svg.png`}
+            alt="Sory"
           />
           <h1 class="large">
             {props.profile.other_profile.user.firstName}{" "}

@@ -9,14 +9,14 @@ export const loadUser = () => async (dispatch) => {
     authToken(localStorage.token);
   }
   try {
-    const res = await axios.get("/api/auth");
+    const res = await axios.get("http://localhost:5001/api/auth");
     // console.log(res.data.data[0].msg);
     dispatch({
       type: "USER_LOADED",
       payload: res.data.data[0].msg,
     });
 
-    const response = await axios.get("/api/profile/me");
+    const response = await axios.get("http://localhost:5001/api/profile/me");
     console.log(response.data.data[0]);
     dispatch({
       type: "L_PROFILE",
@@ -61,7 +61,7 @@ export const RegisterUser =
       //   config
       // );
 
-      const res = await axios.post("http://localhost:5000/api/user", fomData, {
+      const res = await axios.post("http://localhost:5001/api/user", fomData, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -98,7 +98,7 @@ export const login = (email, password) => async (dispatch) => {
       password,
     });
     const res = await axios.post(
-      "http://localhost:5000/api/auth/login",
+      "http://localhost:5001/api/auth/login",
       body,
       config
     );

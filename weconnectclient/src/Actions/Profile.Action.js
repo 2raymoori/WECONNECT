@@ -2,7 +2,7 @@ import axios from "axios";
 import { setAlert } from "./Alert";
 export const uProfile = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:5000/api/profile/me");
+    const res = await axios.get("http://localhost:5001/api/profile/me");
     // console.log(res.data.data[0]);
     dispatch({
       type: "L_PROFILE",
@@ -30,7 +30,7 @@ export const addProfile = (profileObject) => async (dispatch) => {
     const body = JSON.stringify(profileObject);
 
     const res = await axios.post(
-      "http://localhost:5000/api/profile/add",
+      "http://localhost:5001/api/profile/add",
       body,
       config
     );
@@ -43,7 +43,7 @@ export const addProfile = (profileObject) => async (dispatch) => {
 };
 
 export const updateProfile = (profileObj, profileId) => async (dispatch) => {
-  const updateUrl = `http://localhost:5000/api/profile/update/${profileId}`;
+  const updateUrl = `http://localhost:5001/api/profile/update/${profileId}`;
   try {
     const config = {
       headers: {
@@ -67,7 +67,7 @@ export const addExperience =
       };
       const body = JSON.stringify(experienceData);
       const res = await axios.put(
-        `http://localhost:5000/api/profile/addexperience/${profileId}`,
+        `http://localhost:5001/api/profile/addexperience/${profileId}`,
         body,
         config
       );
@@ -93,7 +93,7 @@ export const addEducation = (educationData, profileId) => async (dispatch) => {
     };
     const body = JSON.stringify(educationData);
     const res = await axios.put(
-      `http://localhost:5000/api/profile/addedu/${profileId}`,
+      `http://localhost:5001/api/profile/addedu/${profileId}`,
       body,
       config
     );
@@ -113,7 +113,7 @@ export const addEducation = (educationData, profileId) => async (dispatch) => {
 export const deleteProfile = (profileId) => async (dispatch) => {
   try {
     const res = await axios.delete(
-      `http://localhost:5000/api/profile/delete/${profileId}`
+      `http://localhost:5001/api/profile/delete/${profileId}`
     );
     dispatch(
       setAlert("Profile Successsfully Deleted from the System.", "success")
@@ -132,7 +132,7 @@ export const deleteProfile = (profileId) => async (dispatch) => {
 export const deleteEducation = (profileId, educationId) => async (dispatch) => {
   try {
     const res = await axios.delete(
-      `http://localhost:5000/api/profile/${profileId}/${educationId}`
+      `http://localhost:5001/api/profile/${profileId}/${educationId}`
     );
     dispatch(
       setAlert("Education Successsfully Deleted from the System.", "success")
@@ -151,7 +151,7 @@ export const deleteExperience =
   (profileId, experienceId) => async (dispatch) => {
     try {
       const res = await axios.delete(
-        `http://localhost:5000/api/profile/${profileId}/${experienceId}/delete`
+        `http://localhost:5001/api/profile/${profileId}/${experienceId}/delete`
       );
       dispatch(
         setAlert("Experience Successsfully Deleted from the System.", "success")
@@ -167,7 +167,7 @@ export const deleteExperience =
   };
 export const loadProfiles = () => async (dispatch) => {
   try {
-    const URL = "http://localhost:5000/api/profile/allprofile";
+    const URL = "http://localhost:5001/api/profile/allprofile";
     const res = await axios.get(URL);
     const profiles = res.data.data[0].msg;
     dispatch({

@@ -38,7 +38,7 @@ const Dashboard = (props) => {
   };
   const loadProfile = async () => {
     try {
-      const res = await axios.get("/api/profile/me");
+      const res = await axios.get("http://localhost:5001/api/profile/me");
       // console.log(res.data.data[0].msg);
       const curProfile = res.data.data[0].msg;
       console.log(curProfile);
@@ -81,7 +81,7 @@ const Dashboard = (props) => {
           <Fragment>
             <p class="lead">
               <div className="imgContainer">
-              <img src={`http://localhost:5000/pImages/${props.auth.user.profileImg}`} height={50}  width={10} />
+              <img src={`http://localhost:5001/pImages/${props.auth.user.profileImg}`} height={50}  width={10} />
               </div>
                Welcome{" "}
               <i>{props.auth.user && props.auth.user.firstName}</i>

@@ -92,6 +92,7 @@ const allProfile = async (req, res) => {
       "firstName",
       "lastName",
       "email",
+        "profileImg",
     ]);
     return res
       .status(200)

@@ -9,7 +9,7 @@ export const createPost = (inputTitle, inputDesc) => async (dispatch) => {
     };
     const data = { title: inputTitle, description: inputDesc };
     const body = JSON.stringify(data);
-    const postUrl = "http://localhost:5000/api/post/add";
+    const postUrl = "http://localhost:5001/api/post/add";
     const res = await axios.post(postUrl, body, config);
     dispatch({
       type: "ADD_POST",
@@ -24,7 +24,7 @@ export const createPost = (inputTitle, inputDesc) => async (dispatch) => {
 
 export const loadCurPosts = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:5000/api/post/myposts");
+    const res = await axios.get("http://localhost:5001/api/post/myposts");
 
     dispatch({
       type: "LOAD_CUR_USER_POSTS",
@@ -39,7 +39,7 @@ export const loadCurPosts = () => async (dispatch) => {
 
 export const loadOtherPosts = () => async (dispatch) => {
   try {
-    const res = await axios.get("http://localhost:5000/api/post/allPosts");
+    const res = await axios.get("http://localhost:5001/api/post/allPosts");
 
     dispatch({
       type: "LOAD_OTHER_POSTS",
@@ -60,7 +60,7 @@ const config = {
     };
     const data = { description: commentContent};
     const body = JSON.stringify(data);
-    const res = await axios.put(`http://localhost:5000/api/post/${postId}/comment`,body,config);
+    const res = await axios.put(`http://localhost:5001/api/post/${postId}/comment`,body,config);
     if(res){
       dispatch(setAlert("Comment Successfully adaded.","success"));
     }
@@ -73,7 +73,7 @@ catch(error){
 export const likePost = (postId) => async (dispatch) => {
   try {
     const res = await axios.put(
-      `http://localhost:5000/api/post/${postId}/like`
+      `http://localhost:5001/api/post/${postId}/like`
     );
     dispatch(setAlert("Post Successfully Liked.", "success"));
   } catch (error) {

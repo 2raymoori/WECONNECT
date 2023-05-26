@@ -28,6 +28,6 @@ app.use("/api/profile", profileRouter);
 app.use("/api/post", postRouter);
 app.use("/api/auth", authRouter);
 
-app.listen(5000, () => {
+app.listen(5001, () => {
   console.log("Server Successfully running on port 5000");
 });
