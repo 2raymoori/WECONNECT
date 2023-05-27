@@ -20,13 +20,13 @@ const Profiles = (props) => {
               <div class="profile bg-light">
                 <img
                   class="round-img"
-                  src={`http://localhost:5001/pImages/${e.user.profileImg}`}
+                  src= {e.user.profileImg ?`http://localhost:5001/pImages/${e.user.profileImg}`:"https://ionicframework.com/docs/img/demos/avatar.svg"}
                   alt=""
                 />
                 <div>
                   <h2>{`${e.user.firstName} ${e.user.lastName}`}</h2>
                   <p>{`${e.status} at ${e.company}`}</p>
-                  <p>Seattle, WA</p>
+                  <p>Seattle, WssA</p>
                   <Link
                     onClick={() => {
                       props.loadOtherProfile(e);

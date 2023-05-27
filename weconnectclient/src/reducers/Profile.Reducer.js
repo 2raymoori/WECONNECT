@@ -5,7 +5,8 @@ const initState = {
   other_profile: {},
   loading: true,
 };
-
+//lo2raymoori@gmail.com
+//811532_lot
 const profileReducer = (state = initState, action) => {
   switch (action.type) {
     case "L_PROFILE":
@@ -13,6 +14,23 @@ const profileReducer = (state = initState, action) => {
         ...state,
         userProfile: action.payload,
         loading: false,
+      };
+    case "ADD_EDUCATION":
+      console.log(action.payload);
+      const oldState = state.userProfile;
+      oldState.msg.education.push(action.payload);
+      console.log(oldState);
+      return{
+        ...state,
+        userProfile: oldState,
+      };
+    case "ADD_EXPERIENCE":
+      console.log(action.payload);
+      const oldState2 = state.userProfile;
+      oldState2.msg.experience.push(action.payload);
+      return{
+        ...state,
+        userProfile: oldState2,
       };
     case "L_PROFILES":
       return {

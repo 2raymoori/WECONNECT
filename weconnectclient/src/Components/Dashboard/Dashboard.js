@@ -52,7 +52,7 @@ const Dashboard = (props) => {
 
   useEffect(() => {
     loadProfile();
-    console.log(profile);
+    console.log(props.p);
   }, []);
   if (props.auth.isAuthenticated) {
     //
@@ -81,7 +81,10 @@ const Dashboard = (props) => {
           <Fragment>
             <p class="lead">
               <div className="imgContainer">
-              <img src={`http://localhost:5001/pImages/${props.auth.user.profileImg}`} height={50}  width={10} />
+              <img
+                  src={props.auth.user.profileImg ?`http://localhost:5001/pImages/${props.auth.user.profileImg}`:"https://ionicframework.com/docs/img/demos/avatar.svg"}
+              
+                   height={50}  width={10} />
               </div>
                Welcome{" "}
               <i>{props.auth.user && props.auth.user.firstName}</i>
@@ -213,40 +216,3 @@ export default connect(mapStateToProps, {
   deleteEducation,
   deleteExperience,
 })(Dashboard);
-
-/*
-import axios from "axios";
-import React, { Fragment, useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { Link, Navigate } from "react-router-dom";
-import { uProfile } from "../../Actions/Profile.Action";
-
-const Dashboard = (props) => {
-  const [profile, setProfile] = useState({});
-
-  const loadProfile = async () => {
-    try {
-      const res = await axios.get("/api/profile/me");
-      // console.log(res.data.data[0].msg);
-      const curProfile = res.data.data[0].msg;
-      setProfile((profile) => ({
-        ...profile,
-        ...curProfile,
-      }));
-    } catch (error) {}
-  };
-
-  useEffect(() => {
-    loadProfile();
-    console.log(profile);
-  }, []);
-
-  return <div>DASHBOARD {`${profile.bio === undefined}`}</div>;
-};
-const mapStateToProps = (state) => ({
-  auth: state.auth,
-  p: state.p,
-});
-export default connect(mapStateToProps, { uProfile })(Dashboard);
-
-*/

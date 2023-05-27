@@ -15,8 +15,8 @@ const Profile = (props) => {
         <div class="profile-top bg-primary p-2">
           <img
             class="round-img my-1"
-              src={`http://localhost:5001/pImages/${props.profile.userProfile.msg.user.profileImg}`}
-            alt=""
+            src={props.profile.userProfile.msg.user.profileImg ?`http://localhost:5001/pImages/${props.profile.userProfile.msg.user.profileImg}`:"https://ionicframework.com/docs/img/demos/avatar.svg"}
+              alt=""
           />
           <h1 class="large">
             {props.profile.userProfile.msg.user.firstName}{" "}

@@ -71,8 +71,14 @@ export const addExperience =
         body,
         config
       );
-      console.log(res.data);
+      console.log(res.data.data[0].msg);
+      const newExperience = res.data.data[0].msg.experience.pop();
+        // console.log(newExperience);
       dispatch(setAlert("Experience Successfully added", "success"));
+      dispatch({
+        type: "ADD_EXPERIENCE",
+        payload: newExperience,
+      });
     } catch (error) {
       console.log(error);
       dispatch(
@@ -97,8 +103,16 @@ export const addEducation = (educationData, profileId) => async (dispatch) => {
       body,
       config
     );
-    console.log(res.data);
+    const eduData = res.data.data[0].msg.education.pop();
+    console.log('#################### BODY ####################')
+    console.log(body);
     dispatch(setAlert("Education Successfully added", "success"));
+
+    dispatch({
+      type: "ADD_EDUCATION",
+      payload: eduData,
+    });
+
   } catch (error) {
     console.log(error);
     dispatch(
