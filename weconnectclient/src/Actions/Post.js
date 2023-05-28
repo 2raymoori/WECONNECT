@@ -85,3 +85,34 @@ export const likePost = (postId) => async (dispatch) => {
     );
   }
 };
+export const deletePost = (postId) => async (dispatch) => {
+    try {
+        console.log("deletePost Action called");
+        console.log(postId);
+        const res = await axios.delete(
+        `http://localhost:5001/api/post/${postId}`
+        );
+        if(res.status === 200){
+            dispatch({
+                type: "REMOVE_POST",
+                payload: postId,
+            })
+            dispatch(setAlert("Post Successfully Deleted.", "success"));
+        }
+        else{
+            dispatch(
+            setAlert(
+                "Sorry there exists an error within the system during post deletion. Please try again later",
+                "danger"
+            )
+            );
+        }
+    } catch (error) {
+        dispatch(
+        setAlert(
+            "Sorry there exists an error within the system during post deletion. Please try again later",
+            "danger"
+        )
+        );
+    }
+}

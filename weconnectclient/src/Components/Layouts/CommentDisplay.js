@@ -56,5 +56,5 @@ const CommentList = (props) => {
         </>
     );
 };
-export default connect(null,{addComment})(CommentList)
+export default React.memo(CommentList)
 // addComment

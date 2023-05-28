@@ -2,6 +2,7 @@ import { connect } from "react-redux";
 import React, { useEffect, useState } from "react";
 import { createPost } from "../../Actions/Post";
 import CommentList from "./CommentDisplay";
+import DeletePost from "../DeletePost";
 
 const Post = (props) => {
   const [comment, setComment] = useState("");
@@ -88,9 +89,8 @@ const Post = (props) => {
                   Discussion{" "}
                   <span class="comment-count">{e.comments.length}</span>
                 </button>
-                <button type="button" class="btn btn-danger">
-                  <i class="fas fa-times"></i>
-                </button>
+                {/*/// bring back delete button*/}
+                <DeletePost postId={e._id}/>
               </div>
             </div>
           );

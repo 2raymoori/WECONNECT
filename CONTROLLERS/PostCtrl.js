@@ -29,7 +29,7 @@ const deletepost = async (req, res) => {
     const postToDelete = await PostModel.findById(req.params.id);
     if (postToDelete.user == req.user.id) {
       await postToDelete.delete();
-      return res.status(200).json({
+      return res.status(200).json({ 
         status: "success",
         data: [{ msg: "Post Successfully Deleted", data: postToDelete }],
       });
