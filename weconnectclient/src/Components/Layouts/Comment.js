@@ -10,10 +10,14 @@ const Comment = (props) => {
   const [commentContent,setCommentContent] = useState("");
 
   const handleClose = () => {
-      props.addComment(props.postId,commentContent);
-      props.updateCommentCount(true)
     props.hidePost();
+    setCommentContent("");
   };
+  const handleCommentAdd = ()=>{
+    props.addComment(props.postId,commentContent);
+    props.updateCommentCount(true);
+    setCommentContent("");
+  }
   const captureText = (e)=>{
     setCommentContent(e.target.value)
   }
@@ -47,7 +51,7 @@ const Comment = (props) => {
           <Button variant="secondary" onClick={handleClose}>
             Cancel Comment
           </Button>
-          <Button variant="primary" onClick={handleClose}>
+          <Button variant="primary" onClick={handleCommentAdd}>
             Post Comment
           </Button>
         </Modal.Footer>

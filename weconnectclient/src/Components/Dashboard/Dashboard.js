@@ -83,7 +83,6 @@ const Dashboard = (props) => {
               <div className="imgContainer">
               <img
                   src={props.auth.user.profileImg ?`http://localhost:5001/pImages/${props.auth.user.profileImg}`:"https://ionicframework.com/docs/img/demos/avatar.svg"}
-              
                    height={50}  width={10} />
               </div>
                Welcome{" "}

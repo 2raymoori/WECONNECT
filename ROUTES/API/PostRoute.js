@@ -40,22 +40,3 @@ Router.put(
 );
 
 module.exports = Router;
-
-// {
-//   "status": "Success",
-//   "data": [
-//     {
-//       "msg": "Post Successfully added",
-//       "data": {
-//         "user": "62dd610e3281a0af9054ed8a",
-//         "title": "LOT",
-//         "description": "LOT Post",
-//         "_id": "630248f41ade0d58580c4874",
-//         "likes": [],
-//         "comments": [],
-//         "postDate": "2022-08-21T15:02:12.956Z",
-//         "__v": 0
-//       }
-//     }
-//   ]
-// }

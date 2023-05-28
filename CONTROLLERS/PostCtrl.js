@@ -49,7 +49,8 @@ const allpost = async (req, res) => {
       "firstName",
       "lastName",
       "email",
-    ]);;
+      "profileImg",
+    ]);
     return res
       .status(200)
       .json({ status: "Success", data: [{ msg: allPost }] });
@@ -139,7 +140,6 @@ const likePost = async (req, res) => {
     return res.status(500).json({ status: "Failure", data: "Error..." });
   }
 };
-/*
 const unlikePost = async(req,res) =>{
     try {
         const postId = req.params.id;
@@ -158,7 +158,6 @@ const unlikePost = async(req,res) =>{
                 await findPost.save();
             }
             return res.status(200).json({"status":"Success","data":[{"msg":"Post like success","data":findPost}]})
-            console.log("Post Found");
         }
         else{
             return res.status(400).json({"status": "Failure","data":[{"msg": "No Post with such an Id in the System"}]})
@@ -168,7 +167,6 @@ const unlikePost = async(req,res) =>{
     }
 
 }
-*/
 
 const commentPost = async (req, res) => {
   try {
