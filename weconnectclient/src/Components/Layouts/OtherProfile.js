@@ -9,13 +9,10 @@ const OtherProfile = (props) => {
 
   return (
     <div>
-      <a href="profiles.html" class="btn btn-light">
-        Back To Profiles
-      </a>
 
       <div class="profile-grid my-1">
         {/* <!-- Top --> */}
-        <div class="profile-top bg-primary p-2">
+        <div class="profile-top bg-primary p-2 rounded-3 shadow">
           <img
             class="round-img my-1"
             src={ props.profile.other_profile.user.profileImg ? `http://localhost:5001/pImages/${props.profile.other_profile.user.profileImg}`:`https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Avatar_icon_green.svg/2048px-Avatar_icon_green.svg.png`}
@@ -26,7 +23,6 @@ const OtherProfile = (props) => {
             {props.profile.other_profile.user.lastName}
           </h1>
           <p class="lead">{props.profile.other_profile.status}</p>
-          <p>Seattle, WA</p>
           {props.profile.other_profile.social && (
             <div class="icons my-1">
               {props.profile.other_profile.social.twitter ? (
@@ -61,7 +57,7 @@ const OtherProfile = (props) => {
         </div>
 
         {/* <!-- About --> */}
-        <div class="profile-about bg-light p-2">
+        <div class="profile-about bg-light p-2 rounded-3 shadow">
           <h2 class="text-primary">
             {props.profile.other_profile.user.firstName}'s Bio
           </h2>
@@ -80,7 +76,7 @@ const OtherProfile = (props) => {
         </div>
 
         {/* <!-- Experience --> */}
-        <div class="profile-exp bg-white p-2">
+        <div class=" rounded-3 shadow profile-exp bg-white p-2">
           <h2 class="text-primary">Experience</h2>
           {props.profile.other_profile.experience.length === 0 ? (
             <div>
@@ -113,7 +109,7 @@ const OtherProfile = (props) => {
         </div>
 
         {/* <!-- Education --> */}
-        <div class="profile-edu bg-white p-2">
+        <div class="rounded-3 shadow profile-edu bg-white p-2">
           <h2 class="text-primary">Education</h2>
           {props.profile.other_profile.education.length === 0 ? (
             <div className="profile-edu-box">

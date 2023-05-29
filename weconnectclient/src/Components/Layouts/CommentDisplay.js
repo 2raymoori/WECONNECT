@@ -24,7 +24,7 @@ const CommentList = (props) => {
     const displayComment = ()=>{
         let commentList = filterComment(props.post.pId);
         console.log(commentList);
-        return commentList.map((comment)=>{
+        return commentList?.map((comment)=>{
             return (
                 <div className={"p-1 m-2 rounded-3 bg-secondary bg-gradient"}>
                     <p className={"text-white fw-bold"}>{comment.description}</p>

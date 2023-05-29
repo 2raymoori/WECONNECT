@@ -62,6 +62,10 @@ const config = {
     const body = JSON.stringify(data);
     const res = await axios.put(`http://localhost:5001/api/post/${postId}/comment`,body,config);
     if(res){
+        dispatch({
+            type: "ADD_COMMENT",
+            payload:{description:commentContent,postId:postId}
+        })
       dispatch(setAlert("Comment Successfully adaded.","success"));
     }
 }

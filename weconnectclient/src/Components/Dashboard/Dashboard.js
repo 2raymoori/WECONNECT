@@ -8,28 +8,26 @@ import {
   deleteEducation,
   deleteExperience,
 } from "../../Actions/Profile.Action";
+import Modal from "react-bootstrap/Modal";
 
 const Dashboard = (props) => {
   const [profile, setProfile] = useState({});
   const [loading, setLoading] = useState(true);
+  const [showDelete,setShowDelete] = useState(false);
+  const [deleteData,setDeleteData] = useState({deletionType:0,profileId:"",id2:""});
+
+
+
   const confirmDelete = (deletionType, profileId, id2) => {
-    if (deletionType === 1) {
+    if (deleteData.deletionType === 1) {
       // Experience to delete
-      const userAns = window.confirm(
-        "Are you sure you want to delete this Experrience?"
-      );
-      if (userAns) {
-        props.deleteExperience(profileId, id2);
-      }
+        props.deleteExperience(deleteData.profileId, deleteData.id2);
+
     } else {
       // Educationn to delete
-      const userAns = window.confirm(
-        "Are you sure you want to delete this Education?"
-      );
-      if (userAns) {
-        props.deleteEducation(profileId, id2);
-      }
+        props.deleteEducation(deleteData.profileId, deleteData.id2);
     }
+    handleClose();
   };
   const deleteProfile = (profileId) => {
     if (window.confirm("Are you sure you want to delete your Profile?")) {
@@ -49,6 +47,13 @@ const Dashboard = (props) => {
       setLoading(false);
     } catch (error) {}
   };
+  const handleClose = ()=>{
+    setShowDelete(false);
+  }
+  const deleteItem = (deletionType, profileId, id2)=>{
+      setShowDelete(true);
+    setDeleteData({deletionType,profileId,id2});
+  }
 
   useEffect(() => {
     loadProfile();
@@ -66,6 +71,20 @@ const Dashboard = (props) => {
       </div>
     ) : (
       <Fragment>
+        <Modal show={showDelete} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Confirmation...</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <h2>Are you sure you want to delete this Post?</h2>
+            <div>
+
+              <button onClick={handleClose} className={'btn btn-primary'}>Cancel</button>
+              <button onClick={confirmDelete} className={'btn btn-danger'}>Confirm</button>
+            </div>
+          </Modal.Body>
+        </Modal>
+
         {}
         <h1 className="large text-primary">Dashboard</h1>
         {/* props.profile.profile.msg */}
@@ -104,8 +123,8 @@ const Dashboard = (props) => {
 
             {profile.experience.length === 0 ? (
               <div>
-                <h2>Sorry There is no Experience yet in your profile.</h2>
-                <h2>Kindly click on Add Experience to add an Experience</h2>
+                <p className={"text-center fw-bold text-danger"}>Sorry There is no Experience yet in your profile.</p>
+                <p className={"text-center fw-bold text-danger"}>Kindly click on Add Experience to add an Experience</p>
               </div>
             ) : (
               <table class="table">
@@ -130,7 +149,7 @@ const Dashboard = (props) => {
                         <td>
                           <button
                             onClick={() => {
-                              confirmDelete(1, profile._id, e._id);
+                              deleteItem(1, profile._id, e._id);
                             }}
                             class="btn btn-danger"
                           >
@@ -147,8 +166,8 @@ const Dashboard = (props) => {
             <h2 class="my-2">Education Credentials</h2>
             {profile.education.length === 0 ? (
               <div>
-                <h2>Sorry There is no Experience yet in your profile.</h2>
-                <h2>Kindly click on Add Experience to add an Experience</h2>
+                <p className={"text-center fw-bold text-danger"}>Sorry There is no Education yet in your profile.</p>
+                <p className={"text-center fw-bold text-danger"}>Kindly click on Add Education to add an Education</p>
               </div>
             ) : (
               <table class="table">
@@ -173,7 +192,7 @@ const Dashboard = (props) => {
                         <td>
                           <button
                             onClick={() => {
-                              confirmDelete(0, profile._id, e._id);
+                              deleteItem(0, profile._id, e._id);
                             }}
                             class="btn btn-danger"
                           >
@@ -186,17 +205,17 @@ const Dashboard = (props) => {
                 </tbody>
               </table>
             )}
-            <div class="my-2">
-              <button
-                onClick={() => {
-                  deleteProfile(profile._id);
-                }}
-                class="btn btn-danger"
-              >
-                <i class="fas fa-user-minus"></i>
-                Delete My Account
-              </button>
-            </div>
+            {/*<div class="my-2">*/}
+            {/*  <button*/}
+            {/*    onClick={() => {*/}
+            {/*      deleteProfile(profile._id);*/}
+            {/*    }}*/}
+            {/*    class="btn btn-danger"*/}
+            {/*  >*/}
+            {/*    <i class="fas fa-user-minus"></i>*/}
+            {/*    Delete My Account*/}
+            {/*  </button>*/}
+            {/*</div>*/}
           </Fragment>
         )}
       </Fragment>

@@ -37,8 +37,15 @@ const Experience = (props) => {
   const submitData = (e) => {
     e.preventDefault();
     props.addExperience(formData, id);
-    console.log("Fomr is Submitting. ");
-    console.log(formData);
+    setFormData({
+      title: "",
+      company: "",
+      location: "",
+      from: "",
+      to: "",
+      current: false,
+      description: "",
+    })
   };
   return (
     <div>
@@ -121,9 +128,6 @@ const Experience = (props) => {
           ></textarea>
         </div>
         <input type="submit" className="btn btn-primary my-1" />
-        <a class="btn btn-light my-1" href="dashboard.html">
-          Go Back
-        </a>
       </form>
     </div>
   );

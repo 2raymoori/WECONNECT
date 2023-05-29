@@ -1,18 +1,16 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import {Link} from "react-router-dom";
 const Profile = (props) => {
   useEffect(() => {
     console.log(props.profile);
   });
   return (
     <div>
-      <a href="profiles.html" class="btn btn-light">
-        Back To Profiles
-      </a>
 
       <div class="profile-grid my-1">
         {/* <!-- Top --> */}
-        <div class="profile-top bg-primary p-2">
+        <div class="rounded-3 shadow profile-top bg-primary p-2">
           <img
             class="round-img my-1"
             src={props.profile.userProfile.msg.user.profileImg ?`http://localhost:5001/pImages/${props.profile.userProfile.msg.user.profileImg}`:"https://ionicframework.com/docs/img/demos/avatar.svg"}
@@ -23,7 +21,6 @@ const Profile = (props) => {
             {props.profile.userProfile.msg.user.lastName}
           </h1>
           <p class="lead">{props.profile.userProfile.msg.status}</p>
-          <p>Seattle, WA</p>
           {props.profile.userProfile.msg.social && (
             <div class="icons my-1">
               {props.profile.userProfile.msg.social.twitter ? (
@@ -58,7 +55,7 @@ const Profile = (props) => {
         </div>
 
         {/* <!-- About --> */}
-        <div class="profile-about bg-light p-2">
+        <div class="rounded-3 shadow profile-about bg-light p-2">
           <h2 class="text-primary">
             {props.profile.userProfile.msg.user.firstName}'s Bio
           </h2>
@@ -77,11 +74,16 @@ const Profile = (props) => {
         </div>
 
         {/* <!-- Experience --> */}
-        <div class="profile-exp bg-white p-2">
+        <div class="rounded-3 shadow profile-exp bg-white p-2">
           <h2 class="text-primary">Experience</h2>
           {props.profile.userProfile.msg.experience.length === 0 ? (
-            <div>
+            <div className={" d-flex flex-column justify-content-center align-items-center"}>
               <h2>Sorry No Experience added yet.</h2>
+              <div className="d-grid gap-2 d-md-block">
+                <Link to={`/add-experience/${props.profile.userProfile.msg._id}`} className="btn btn-primary ">
+                  Add Experience
+                </Link>
+              </div>
             </div>
           ) : (
             <div>
@@ -110,11 +112,16 @@ const Profile = (props) => {
         </div>
 
         {/* <!-- Education --> */}
-        <div class="profile-edu bg-white p-2">
+        <div class="rounded-3 shadow profile-edu bg-white p-2">
           <h2 class="text-primary">Education</h2>
           {props.profile.userProfile.msg.education.length === 0 ? (
-            <div className="profile-edu-box">
+            <div className="profile-edu-box d-flex flex-column justify-content-center align-items-center">
               <h2>Sorry No Education added yet.</h2>
+              <div className="d-grid gap-2 d-md-block">
+                <Link to={`/add-education/${props.profile.userProfile.msg._id}`} className="btn btn-primary ">
+                  Add Education {}
+                </Link>
+              </div>
             </div>
           ) : (
             <div>

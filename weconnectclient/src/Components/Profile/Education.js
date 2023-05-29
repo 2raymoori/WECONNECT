@@ -14,6 +14,8 @@ const Education = (props) => {
     description: "",
     current: false,
   });
+
+
   const captureData = (e) => {
     setFormData({
       ...formData,
@@ -35,7 +37,15 @@ const Education = (props) => {
   const submitData = (e) => {
     e.preventDefault();
     props.addEducation(formData, id);
-    console.log(formData);
+    setFormData({
+      school: "",
+      degree: "",
+      fieldofstudy: "",
+      from: "",
+      to: "",
+      description: "",
+      current: false,
+    })
   };
   return (
     <div>
@@ -119,9 +129,6 @@ const Education = (props) => {
           ></textarea>
         </div>
         <input type="submit" className="btn btn-primary my-1" />
-        <a class="btn btn-light my-1" href="dashboard.html">
-          Go Back
-        </a>
       </form>
     </div>
   );

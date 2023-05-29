@@ -29,8 +29,23 @@ const postReducer = (state = initState, action) => {
       return Object.assign({}, state, {
         curUserPost: state.curUserPost.concat(action.payload),
       });
+      case "ADD_COMMENT":
+        const oldPost = state.otherPosts;
+        for(let i=0;i<oldPost.length;i++){
+            if(oldPost[i]._id === action.payload.postId){
+                oldPost[i].comments.push(action.payload);
+                break;
+            }
+        }
+        state.otherPosts = oldPost;
+        return{
+            ...state,
+          otherPosts: oldPost,
+        };
+     //    Object.assign({}, state, {
+     // otherPosts: oldPost,
+     //    })
     case "REMOVE_POST":
-
         return Object.assign({}, state, {
             curUserPost: state.curUserPost.filter((post) => post._id !== action.payload),
         });

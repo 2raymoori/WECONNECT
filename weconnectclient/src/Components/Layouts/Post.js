@@ -19,6 +19,8 @@ const Post = (props) => {
   const submitForm = (e) => {
     e.preventDefault();
     props.createPost(postTitle, comment);
+    setPostTitle("");
+    setComment("");
   };
   const updatePost = (id,owner,content,title)=>{
     setPost({pId:id,owner:owner,title,content:content});

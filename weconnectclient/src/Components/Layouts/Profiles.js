@@ -17,7 +17,7 @@ const Profiles = (props) => {
         <div class="profiles">
           {props.profiles.profiles.map((e) => {
             return (
-              <div class="profile bg-light">
+              <div class="profile bg-light shadow p-2 mb-5 bg-body rounded">
                 <img
                   class="round-img"
                   src= {e.user.profileImg ?`http://localhost:5001/pImages/${e.user.profileImg}`:"https://ionicframework.com/docs/img/demos/avatar.svg"}
@@ -26,7 +26,6 @@ const Profiles = (props) => {
                 <div>
                   <h2>{`${e.user.firstName} ${e.user.lastName}`}</h2>
                   <p>{`${e.status} at ${e.company}`}</p>
-                  <p>Seattle, WssA</p>
                   <Link
                     onClick={() => {
                       props.loadOtherProfile(e);
@@ -37,15 +36,20 @@ const Profiles = (props) => {
                     View Profile
                   </Link>
                 </div>
-                <ul>
-                  {e.skills.map((data) => {
-                    return (
-                      <li class="text-primary">
-                        <i class="fas fa-check"></i> {data}
-                      </li>
-                    );
-                  })}
-                </ul>
+                  <div>
+
+                      <p>skill Set</p>
+                      <ul>
+
+                          {e.skills.map((data) => {
+                              return (
+                                  <li className="text-primary">
+                                      <i className="fas fa-check"></i> {data}
+                                  </li>
+                              );
+                          })}
+                      </ul>
+                  </div>
               </div>
             );
           })}
