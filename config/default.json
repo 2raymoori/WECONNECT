@@ -1,4 +1,7 @@
 {
-    "dbURL":"mongodb://localhost:27017/WECONNECT",
+
+    "dbURL___":"mongodb+srv://lot:811532_lot@letsconnect.pvdur.mongodb.net/",
+    "dbURL":"mongodb+srv://noynjie:811532_lot@letsconnect.pvdur.mongodb.net/?retryWrites=true&w=majority",
+    "_dbURL_":"mongodb://localhost:27017/WECONNECT",
     "TOKEN_KEY":"4472897njieS_!"
 }
