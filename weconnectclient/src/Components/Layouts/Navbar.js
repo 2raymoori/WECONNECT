@@ -37,13 +37,13 @@ const Navbar = (props) => {
     return (
       <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item">
-          <a className="nav-link" href="#!">Developers</a>
+          <a className="nav-link" href="/">Developers</a>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/register">Register</Link>
+          <Link className="nav-link" onClick={()=>{props.hideIt()}} to="/register">Register</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/login">Login</Link>
+          <Link className="nav-link" onClick={()=>{props.hideIt()}} to="/login">Login</Link>
         </li>
       </ul>
     );
@@ -54,8 +54,8 @@ const Navbar = (props) => {
           <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
               <div className="container-fluid d-flex justify-content-between">
                   <h1 className="navbar-brand">
-                      <Link className={"nav-item"} to="/">
-                          <i className="fas fa-code"></i> DevConnector
+                      <Link className={"nav-item"} to="/" onClick={()=>{props.showIt(0)}} >
+                          <i className="fas fa-code"></i> Let's Connect
                       </Link>
                   </h1>
                   <button className="navbar-toggler" type="button" data-bs-toggle="collapse"

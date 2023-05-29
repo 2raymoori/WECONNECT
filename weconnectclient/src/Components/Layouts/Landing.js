@@ -10,16 +10,16 @@ const Landing = (props) => {
     <section className="landing">
       <div className="dark-overlay">
         <div className="landing-inner">
-          <h1 className="x-large">Developer Connector</h1>
+          <h1 className="x-large">Let's Connect</h1>
           <p className="lead">
             Create a developer profile/portfolio, share posts and get help from
-            other developers
+            other developers...
           </p>
           <div className="buttons">
-            <Link to="/register" className="btn btn-primary">
+            <Link onClick={()=>{props.showItem(1)}} to="/register" className="btn btn-primary">
               Sign Up
             </Link>
-            <Link to="/login" className="btn btn-light">
+            <Link onClick={()=>{props.showItem(1)}} to="/login" className="btn btn-light">
               Login
             </Link>
           </div>
