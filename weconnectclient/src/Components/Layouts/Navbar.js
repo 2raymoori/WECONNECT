@@ -14,20 +14,21 @@ const Navbar = (props) => {
           <Link className="nav-link" to="/dashboard">Dashboard</Link>
         </li>
         <li className="nav-item">
-            {props.p.userProfile?.msg == null?  null: (<Link className="nav-link" to="/profile">My Profile</Link>)}
+            {props.p.userProfile?.msg == null?  null: (<Link className="nav-link" to="/profile"><i
+                className="fa-solid fa-id-card"></i> My Profile</Link>)}
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/profiles">Other Profiles</Link>
+          <Link className="nav-link" to="/profiles"><i className="fa-solid fa-id-card"></i> Other Profiles</Link>
         </li>
            <li className="nav-item">
-              <Link className="nav-link" to="/post">My Posts</Link>
+              <Link className="nav-link" to="/post"><i className="fa-duotone fa-mailbox"></i> My Posts</Link>
           </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/posts">Other Posts</Link>
+          <Link className="nav-link" to="/posts"><i className="fa-duotone fa-mailbox"></i> Other Posts</Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/login" onClick={props.logout}>
-            Logout
+            Logout <i className="fa-solid fa-right-from-bracket"></i>
           </Link>
         </li>
       </ul>
@@ -40,10 +41,12 @@ const Navbar = (props) => {
           <a className="nav-link" href="/">Developers</a>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" onClick={()=>{props.hideIt()}} to="/register">Register</Link>
+          <Link className="nav-link" onClick={()=>{props.hideIt()}} to="/register"><i
+              className="fa-duotone fa-id-card"></i> Register</Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" onClick={()=>{props.hideIt()}} to="/login">Login</Link>
+          <Link className="nav-link" onClick={()=>{props.hideIt()}} to="/login"><i
+              className="fa-solid fa-right-to-bracket"></i> Login</Link>
         </li>
       </ul>
     );
