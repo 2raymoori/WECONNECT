@@ -6,7 +6,7 @@ const fileUpload = require("express-fileupload");
 const userRouter = require("./ROUTES/API/UserRoute");
 const postRouter = require("./ROUTES/API/PostRoute");
 const authRouter = require("./ROUTES/API/AuthRoute");
-
+const PORT = process.env.PORT || 5001;
 const app = express();
 
 // initializing db Instance...
@@ -28,6 +28,6 @@ app.use("/api/profile", profileRouter);
 app.use("/api/post", postRouter);
 app.use("/api/auth", authRouter);
 
-app.listen(5001, () => {
+app.listen(PORT, () => {
   console.log("Server Successfully running on port 5000");
 });
