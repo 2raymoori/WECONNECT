@@ -57,8 +57,10 @@ const addUser = async (req, res) => {
           } else {
             if (req.files) {
               const docs = req.files.pImage;
-              docs.mv(`public/pImages/${email}/${docs.name}`);
-              newUser.profileImg = `${email}/${docs.name}`;
+              // docs.mv(`public/pImages/${email}/${docs.name}`);
+              // newUser.profileImg = `${email}/${docs.name}`;
+              docs.mv(`public/pImages/${docs.name}`);
+              newUser.profileImg = `${docs.name}`;
             }
 
             await newUser.save();
