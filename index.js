@@ -29,5 +29,5 @@ app.use("/api/post", postRouter);
 app.use("/api/auth", authRouter);
 
 app.listen(PORT, () => {
-  console.log("Server Successfully running on port 5000");
+  console.log("Server Successfully running on port "+PORT);
 });

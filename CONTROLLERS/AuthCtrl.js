@@ -49,7 +49,7 @@ const login = async (req, res) => {
           });
         } else {
           // password not match
-          return res.status(401).json({
+          return res.status(400).json({
             status: "Error",
             data: [{ msg: `Sorry No Such user with these credentials` }],
           });
